@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:fluro/fluro.dart';
-import 'package:flutter/cupertino.dart';
 
 abstract class BaseRouter {
   void defineRoutes(Router router);
@@ -23,6 +22,8 @@ abstract class BaseRouter {
         return jsonDecode(parameters[key].first).cast<bool>() as T;
       case "List<double>":
         return jsonDecode(parameters[key].first).cast<double>() as T;
+      case "List<Map<dynamic, dynamic>>":
+        return jsonDecode(parameters[key].first).cast<Map<dynamic, dynamic>>() as T;
       case "Map<dynamic, dynamic>":
         return jsonDecode(parameters[key].first) as T;
       default:

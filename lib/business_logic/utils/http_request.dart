@@ -13,14 +13,14 @@ class DioBuilder {
     _dio.options.baseUrl = BASE_URL;
     _dio.options.connectTimeout = connectTimeOut ?? 10000; //10s
     _dio.options.receiveTimeout = receiveTimeout ?? 10000;
-    _dio.interceptors.addAll(interceptors);
+    _dio.interceptors.addAll(interceptors ?? [BaseResponseInterceptor()]);
     return _dio;
   }
 }
 
 class HttpRequest {
   static Dio _dio =
-      DioBuilder.create(interceptors: [BaseResponseInterceptor()]);
+      DioBuilder.create();
 
   Dio get dio => _dio;
 
@@ -28,8 +28,7 @@ class HttpRequest {
       {CancelToken cancelToken}) async {
     Dio _dio = DioBuilder.create(
         connectTimeOut: timeOutMills,
-        receiveTimeout: timeOutMills,
-        interceptors: [BaseResponseInterceptor()]);
+        receiveTimeout: timeOutMills);
     var response = await _dio.get("activity", cancelToken: cancelToken);
     return response.data;
   }
