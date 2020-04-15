@@ -20,7 +20,6 @@ void main() {
   Routers.configureRoutes([
     HomeRouter(),
   ]);
-  HttpRequest.init();
   runApp(MyApp());
 }
 

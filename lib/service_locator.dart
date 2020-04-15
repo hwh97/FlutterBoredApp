@@ -1,4 +1,5 @@
 import 'package:bored/business_logic/view_models/bored_page_view_model.dart';
+import 'package:bored/business_logic/view_models/splash_page_view_model.dart';
 import 'package:bored/services/bored/bored_api_fake.dart';
 import 'package:bored/services/bored/bored_api_impl.dart';
 import 'package:get_it/get_it.dart';
@@ -13,4 +14,5 @@ setUpServiceLocator() {
 
   // set up view models
   serviceLocator.registerFactory<BoredPageViewModel>(() => BoredPageViewModel());
+  serviceLocator.registerFactory<SplashPageViewModel>(() => SplashPageViewModel());
 }

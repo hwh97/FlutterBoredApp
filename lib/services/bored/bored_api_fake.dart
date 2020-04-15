@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:bored/business_logic/models/bored_entity.dart';
 import 'package:bored/services/bored/bored_api.dart';
+import 'package:dio/dio.dart';
 
 class BoredApiFake extends BoredApi {
   final List<Map<String, dynamic>> mockList = [
@@ -41,7 +42,8 @@ class BoredApiFake extends BoredApi {
   ];
 
   @override
-  Future<BoredEntity> getRandomBored() async {
+  Future<BoredEntity> getRandomBored(
+      {int timeOutMills, CancelToken cancelToken}) async {
     BoredEntity entity = await _getRandomBored();
     return entity;
   }

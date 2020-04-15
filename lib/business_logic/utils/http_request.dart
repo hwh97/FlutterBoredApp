@@ -3,21 +3,40 @@ import 'package:flutter/foundation.dart';
 
 const BASE_URL = "https://www.boredapi.com/api/";
 
+class DioBuilder {
+  static Dio create(
+      {int connectTimeOut,
+      int receiveTimeout,
+      List<Interceptor> interceptors}) {
+    Dio _dio = Dio();
+    // Set default configs
+    _dio.options.baseUrl = BASE_URL;
+    _dio.options.connectTimeout = connectTimeOut ?? 10000; //10s
+    _dio.options.receiveTimeout = receiveTimeout ?? 10000;
+    _dio.interceptors.addAll(interceptors);
+    return _dio;
+  }
+}
+
 class HttpRequest {
-  static Dio _dio = Dio();
+  static Dio _dio =
+      DioBuilder.create(interceptors: [BaseResponseInterceptor()]);
 
   Dio get dio => _dio;
 
-  static void init() {
-    // Set default configs
-    _dio.options.baseUrl = BASE_URL;
-    _dio.options.connectTimeout = 10000; //10s
-    _dio.options.receiveTimeout = 10000;
-    _dio.interceptors.add(BaseResponseInterceptor());
+  static Future<Map<String, dynamic>> getActivityWithTimeOut(int timeOutMills,
+      {CancelToken cancelToken}) async {
+    Dio _dio = DioBuilder.create(
+        connectTimeOut: timeOutMills,
+        receiveTimeout: timeOutMills,
+        interceptors: [BaseResponseInterceptor()]);
+    var response = await _dio.get("activity", cancelToken: cancelToken);
+    return response.data;
   }
 
-  static Future<Map<String, dynamic>> getActivity() async {
-    var response = await _dio.get("activity");
+  static Future<Map<String, dynamic>> getActivity(
+      {CancelToken cancelToken}) async {
+    var response = await _dio.get("activity", cancelToken: cancelToken);
     return response.data;
   }
 }

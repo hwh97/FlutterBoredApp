@@ -1,11 +1,9 @@
+import 'package:bored/business_logic/view_models/splash_page_view_model.dart';
 import 'package:bored/consts/asset_constants.dart';
-import 'package:bored/routers/Routers.dart';
-import 'package:bored/routers/home_router.dart';
+import 'package:bored/service_locator.dart';
 import 'package:flare_flutter/flare_actor.dart';
-import 'package:fluro/fluro.dart';
 import 'package:flutter/material.dart';
-
-import 'bored_page.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class SplashPage extends StatefulWidget {
   @override
@@ -15,8 +13,11 @@ class SplashPage extends StatefulWidget {
 }
 
 class SplashPageState extends State<SplashPage> {
+  final SplashPageViewModel _splashPageViewModel = serviceLocator.get<SplashPageViewModel>();
+
   @override
   Widget build(BuildContext context) {
+    ScreenUtil.init(context, width: 375, height: 667, allowFontScaling: false);
     return Scaffold(
       backgroundColor: Theme.of(context).accentColor,
       body: FlareActor(
@@ -33,14 +34,7 @@ class SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
-    Future.delayed(Duration(milliseconds: 1500)).then((_) {
-      Routers.navigateTo(
-        context,
-        HomeRouter.home,
-        params: {"title": "无聊消灭器"},
-        replace: true,
-        transition: TransitionType.fadeIn,
-      );
-    });
+    // prepare data and go to main page
+    _splashPageViewModel.prepareData(context);
   }
 }

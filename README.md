@@ -1,6 +1,6 @@
 # bored
 
-Bored App
+Bored App (Developing)
 
 ## Getting Started
 

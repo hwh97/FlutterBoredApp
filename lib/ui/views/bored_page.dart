@@ -1,12 +1,15 @@
+import 'package:bored/business_logic/models/bored_entity.dart';
 import 'package:bored/business_logic/view_models/bored_page_view_model.dart';
 import 'package:bored/service_locator.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
 class BoredPage extends StatefulWidget {
-  BoredPage({Key key, this.title}) : super(key: key);
+  BoredPage({Key key, this.title, this.boredEntity}) : super(key: key);
 
   final String title;
+  final BoredEntity boredEntity;
 
   @override
   _BoredPageState createState() => _BoredPageState();
@@ -31,7 +34,7 @@ class _BoredPageState extends State<BoredPage> {
                 model.boredEntity?.toJson()?.toString() ?? "loading",
                 style: TextStyle(
                   color: Colors.black,
-                  fontSize: 14,
+                  fontSize: 14.sp,
                 ),
               );
             },
@@ -40,7 +43,7 @@ class _BoredPageState extends State<BoredPage> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: _viewModel.loadData,
-        tooltip: 'Refresh Task',
+        tooltip: 'Refresh Activity',
         child: Icon(Icons.refresh),
       ),
     );
@@ -49,6 +52,8 @@ class _BoredPageState extends State<BoredPage> {
   @override
   void initState() {
     super.initState();
-    _viewModel.loadData();
+    widget.boredEntity == null
+        ? _viewModel.loadData()
+        : _viewModel.init(widget.boredEntity);
   }
 }

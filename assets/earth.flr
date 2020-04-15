@@ -4,8 +4,8 @@
 		{
 			"name": "Artboard",
 			"translation": [
-				-8.181808471679688,
-				12.1212158203125
+				-1032.626220703125,
+				698.7879638671875
 			],
 			"width": 414,
 			"height": 735,
@@ -1459,6 +1459,18 @@
 					"duration": 2,
 					"isLooping": true,
 					"keyed": [
+						{
+							"component": 3,
+							"posY": [
+								[
+									{
+										"time": 0,
+										"interpolatorType": 1,
+										"value": 240
+									}
+								]
+							]
+						},
 						{
 							"component": 10,
 							"posX": [

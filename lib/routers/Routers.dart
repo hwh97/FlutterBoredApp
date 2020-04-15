@@ -38,11 +38,7 @@ class Routers {
     String result = "?";
     int index = 0;
     for (String key in map.keys) {
-      if (map[key] is List || map[key] is Map) {
-        result += "${index == 0 ? "" : "&"}$key=${Uri.encodeFull(jsonEncode(map[key]))}";
-      } else {
-        result += "${index == 0 ? "" : "&"}$key=${Uri.encodeFull(map[key].toString())}";
-      }
+      result += "${index == 0 ? "" : "&"}$key=${Uri.encodeFull(jsonEncode(map[key]))}";
       index++;
     }
     return result;
