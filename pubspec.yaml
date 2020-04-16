@@ -35,6 +35,8 @@ dependencies:
   fluro: ^1.6.3
   # 屏幕适配
   flutter_screenutil: ^1.1.0
+  # Svg
+  flutter_svg: ^0.17.3+1
 
 dev_dependencies:
   flutter_test:
@@ -54,8 +56,8 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
-    - assets/earth.flr
-  #  - images/a_dot_ham.jpeg
+    - assets/flr/earth.flr
+    - assets/svg/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware.

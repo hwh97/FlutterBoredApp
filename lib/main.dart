@@ -31,10 +31,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Boring Destoryer',
       color: Colors.redAccent,
       theme: Provider.of<AppViewModel>(context).getThemeData(darkTheme: false),
-      darkTheme: Provider.of<AppViewModel>(context).getThemeData(darkTheme: true),
+      darkTheme:
+          Provider.of<AppViewModel>(context).getThemeData(darkTheme: true),
       onGenerateRoute: Routers.router.generator,
       home: SplashPage(),
     );
