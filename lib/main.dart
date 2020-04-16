@@ -1,9 +1,11 @@
 import 'dart:io';
 
+import 'package:bored/business_logic/view_models/app_view_model.dart';
 import 'package:bored/routers/home_router.dart';
 import 'package:bored/service_locator.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 
 import 'routers/Routers.dart';
 import 'ui/views/splash_page.dart';
@@ -19,7 +21,10 @@ void main() {
   Routers.configureRoutes([
     HomeRouter(),
   ]);
-  runApp(MyApp());
+  runApp(ChangeNotifierProvider.value(
+    value: serviceLocator.get<AppViewModel>(),
+    child: MyApp(),
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -28,11 +33,8 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Flutter Demo',
       color: Colors.redAccent,
-      theme: ThemeData(
-        accentColor: Color(0xFF30336B),
-        primaryColor: Color(0xFF30336B),
-        primarySwatch: Colors.blue,
-      ),
+      theme: Provider.of<AppViewModel>(context).getThemeData(darkTheme: false),
+      darkTheme: Provider.of<AppViewModel>(context).getThemeData(darkTheme: true),
       onGenerateRoute: Routers.router.generator,
       home: SplashPage(),
     );
