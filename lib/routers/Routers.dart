@@ -38,7 +38,7 @@ class Routers {
     String result = "?";
     int index = 0;
     for (String key in map.keys) {
-      result += "${index == 0 ? "" : "&"}$key=${Uri.encodeFull(jsonEncode(map[key]))}";
+      result += "${index == 0 ? "" : "&"}$key=${Uri.encodeQueryComponent(jsonEncode(map[key]))}";
       index++;
     }
     return result;

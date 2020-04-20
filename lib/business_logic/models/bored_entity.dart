@@ -8,4 +8,9 @@ class BoredEntity with JsonConvert<BoredEntity> {
 	String price;
 	String link;
 	String key;
+
+	@override
+	bool operator ==(other) {
+		return this.key == other.key;
+	}
 }

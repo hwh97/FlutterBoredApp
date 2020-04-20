@@ -55,6 +55,12 @@ class ProgressBarState extends State<ProgressBar>
   }
 
   @override
+  void dispose() {
+    controller?.dispose();
+    super.dispose();
+  }
+
+  @override
   void didUpdateWidget(ProgressBar oldWidget) {
     animation.removeListener(_animationListener);
     controller.reset();

@@ -4,6 +4,7 @@ import 'package:bored/service_locator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 
 class BoredPageViewModel extends ChangeNotifier {
   final BoredApi _boredApi = serviceLocator<BoredApi>();
@@ -11,6 +12,10 @@ class BoredPageViewModel extends ChangeNotifier {
 
   BoredEntity _boredEntity;
   BoredEntity get boredEntity => _boredEntity;
+  List<BoredEntity> _collectList = [];
+  List<BoredEntity> get collectList => _collectList;
+
+  final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
 
   void init(BoredEntity boredEntity) async {
     this._boredEntity = boredEntity;
@@ -35,5 +40,13 @@ class BoredPageViewModel extends ChangeNotifier {
       controller.forward();
     }
     notifyListeners();
+  }
+
+  void addBoredEntity() {
+    if (_collectList.indexWhere((m) => m.key == _boredEntity.key) == -1) {
+      _collectList.insert(0, boredEntity);
+      listKey.currentState.insertItem(0, duration: const Duration(milliseconds: 500));
+//      notifyListeners();
+    }
   }
 }

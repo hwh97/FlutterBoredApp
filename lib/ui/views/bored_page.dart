@@ -21,8 +21,7 @@ class BoredPage extends StatefulWidget {
   _BoredPageState createState() => _BoredPageState();
 }
 
-class _BoredPageState extends State<BoredPage>
-    with TickerProviderStateMixin {
+class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
   final BoredPageViewModel _viewModel =
       serviceLocator.get<BoredPageViewModel>();
   AnimationController _refreshAnimationCtl;
@@ -54,6 +53,7 @@ class _BoredPageState extends State<BoredPage>
               height: 20.w,
             ),
             _todoListHeader,
+            _todoListWidget
           ],
         ),
       ),
@@ -105,38 +105,38 @@ class _BoredPageState extends State<BoredPage>
               ),
             ],
           ),
-          SizedBox(
-            width: 36.w,
-            height: 36.w,
-            child: Provider.of<AppViewModel>(context, listen: false)
-                    .isDark(context)
-                ? FloatingActionButton(
-                    heroTag: "night-tag",
-                    onPressed: () =>
-                        Provider.of<AppViewModel>(context, listen: false)
-                            .setDarkModel(ThemeModel.Light),
-                    tooltip: "Day mode",
-                    child: SvgPicture.asset(
-                      AssetConstants.daySvg,
-                      color: Color(0x98FFFFFF),
-                      width: 22.w,
-                      height: 22.w,
-                    ),
-                  )
-                : FloatingActionButton(
-                    heroTag: "day-tag",
-                    onPressed: () =>
-                        Provider.of<AppViewModel>(context, listen: false)
-                            .setDarkModel(ThemeModel.Dark),
-                    tooltip: 'Night mode',
-                    child: SvgPicture.asset(
-                      AssetConstants.nightSvg,
-                      color: Colors.white,
-                      width: 22.w,
-                      height: 22.w,
-                    ),
-                  ),
-          ),
+//          SizedBox(
+//            width: 36.w,
+//            height: 36.w,
+//            child: Provider.of<AppViewModel>(context, listen: false)
+//                    .isDark(context)
+//                ? FloatingActionButton(
+//                    heroTag: "night-tag",
+//                    onPressed: () =>
+//                        Provider.of<AppViewModel>(context, listen: false)
+//                            .setDarkModel(ThemeModel.Light),
+//                    tooltip: "Day mode",
+//                    child: SvgPicture.asset(
+//                      AssetConstants.daySvg,
+//                      color: Color(0x98FFFFFF),
+//                      width: 22.w,
+//                      height: 22.w,
+//                    ),
+//                  )
+//                : FloatingActionButton(
+//                    heroTag: "day-tag",
+//                    onPressed: () =>
+//                        Provider.of<AppViewModel>(context, listen: false)
+//                            .setDarkModel(ThemeModel.Dark),
+//                    tooltip: 'Night mode',
+//                    child: SvgPicture.asset(
+//                      AssetConstants.nightSvg,
+//                      color: Colors.white,
+//                      width: 22.w,
+//                      height: 22.w,
+//                    ),
+//                  ),
+//          ),
         ],
       );
 
@@ -175,140 +175,151 @@ class _BoredPageState extends State<BoredPage>
         value: _viewModel,
         child: Consumer<BoredPageViewModel>(
           builder: (ctx, model, child) {
-            return Column(
-              children: <Widget>[
-                SizedBox(
-                  height: 10.w,
-                ),
-                Container(
-                  decoration: BoxDecoration(
-                    color: Theme.of(context).cardColor,
-                    borderRadius: BorderRadius.circular(10.w),
-                    boxShadow: [
-                      BoxShadow(
-                        color: Colors.grey.withOpacity(.2),
-                        blurRadius: 10.0, // soften the shadow
-                        spreadRadius: 0.0, //extend the s
-                      ),
-                    ],
+            return GestureDetector(
+              onLongPress: () {
+                _viewModel.addBoredEntity();
+              },
+              child: Column(
+                children: <Widget>[
+                  SizedBox(
+                    height: 10.w,
                   ),
-                  child: ClipRect(
-                    child: Banner(
-                      message: model.boredEntity?.type ?? "",
-                      location: BannerLocation.bottomEnd,
-                      color: Theme.of(context).primaryColor,
-                      child: Container(
-                        margin: EdgeInsets.zero,
-                        padding: EdgeInsets.symmetric(
-                          vertical: 10.w,
-                          horizontal: 6.w,
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Theme.of(context).cardColor,
+                      borderRadius: BorderRadius.circular(10.w),
+                      boxShadow: [
+                        BoxShadow(
+                          color: Colors.grey.withOpacity(.2),
+                          blurRadius: 10.0, // soften the shadow
+                          spreadRadius: 0.0, //extend the s
                         ),
-                        width: double.maxFinite,
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          mainAxisSize: MainAxisSize.max,
-                          children: <Widget>[
-                            AnimatedSize(
-                              duration: Duration(milliseconds: 80),
-                              curve: Curves.linear,
-                              vsync: this,
-                              child: SizedBox(
-                                width: double.maxFinite,
-                                child: Text(
-                                  model.boredEntity?.activity ?? "Loading",
-                                  style: TextStyle(
-                                    color:
-                                    Provider.of<AppViewModel>(context).isDark(context)
-                                        ? Colors.white
-                                        : Theme.of(context).primaryColor,
-                                    height: 1.2.w,
-                                    fontSize: 20.sp,
+                      ],
+                    ),
+                    child: ClipRect(
+                      child: Banner(
+                        message: model.boredEntity?.type ?? "",
+                        location: BannerLocation.bottomEnd,
+                        color: Theme.of(context).primaryColor,
+                        child: Container(
+                          margin: EdgeInsets.zero,
+                          padding: EdgeInsets.symmetric(
+                            vertical: 10.w,
+                            horizontal: 6.w,
+                          ),
+                          width: double.maxFinite,
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            mainAxisSize: MainAxisSize.max,
+                            children: <Widget>[
+                              AnimatedSize(
+                                duration: Duration(milliseconds: 200),
+                                curve: Curves.linear,
+                                vsync: this,
+                                child: SizedBox(
+                                  width: double.maxFinite,
+                                  child: Text(
+                                    model.boredEntity?.activity ?? "Loading",
+                                    style: TextStyle(
+                                      color: Provider.of<AppViewModel>(context)
+                                              .isDark(context)
+                                          ? Colors.white
+                                          : Theme.of(context).primaryColor,
+                                      height: 1.2.w,
+                                      fontSize: 20.sp,
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                descTextWidget("accessibility:"),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                ProgressBar(
-                                  size: Size(200.w, 6.w),
-                                  borderRadius: BorderRadius.circular(6.w),
-                                  value: model.boredEntity?.accessibility != null &&
-                                          model.boredEntity.accessibility.isNotEmpty
-                                      ? double.parse(model.boredEntity?.accessibility)
-                                      : 0.0,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: <Widget>[
-                                descTextWidget("price:"),
-                                SizedBox(
-                                  width: 10.w,
-                                ),
-                                ProgressBar(
-                                  size: Size(200.w, 6.w),
-                                  borderRadius: BorderRadius.circular(6.w),
-                                  value: model.boredEntity?.price != null &&
-                                      model.boredEntity.price.isNotEmpty
-                                      ? double.parse(model.boredEntity?.price)
-                                      : 0.0,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 20.w,
-                            ),
-                            SizedBox(
-                              height: 20.w,
-                              child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                mainAxisSize: MainAxisSize.max,
+                              SizedBox(
+                                height: 20.w,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
                                 children: <Widget>[
-                                  descTextWidget("participants:"),
-                                  Expanded(
-                                    child: ListView(
-                                      padding: EdgeInsets.symmetric(horizontal: 10.w),
-                                      shrinkWrap: true,
-                                      scrollDirection: Axis.horizontal,
-                                      children: List.generate(
-                                        model.boredEntity?.participants ?? 0,
-                                        (index) {
-                                          return Padding(
-                                            padding: index == 0
-                                                ? EdgeInsets.zero
-                                                : EdgeInsets.only(left: 6.w),
-                                            child: Icon(
-                                              Icons.mood,
-                                              size: 16,
-                                              color: Theme.of(context).hintColor,
-                                            ),
-                                          );
-                                        },
-                                      ),
-                                    ),
+                                  descTextWidget("accessibility:"),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  ProgressBar(
+                                    size: Size(200.w, 6.w),
+                                    borderRadius: BorderRadius.circular(6.w),
+                                    value: model.boredEntity?.accessibility !=
+                                                null &&
+                                            model.boredEntity.accessibility
+                                                .isNotEmpty
+                                        ? double.parse(
+                                            model.boredEntity?.accessibility)
+                                        : 0.0,
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
+                              SizedBox(
+                                height: 20.w,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.start,
+                                children: <Widget>[
+                                  descTextWidget("price:"),
+                                  SizedBox(
+                                    width: 10.w,
+                                  ),
+                                  ProgressBar(
+                                    size: Size(200.w, 6.w),
+                                    borderRadius: BorderRadius.circular(6.w),
+                                    value: model.boredEntity?.price != null &&
+                                            model.boredEntity.price.isNotEmpty
+                                        ? double.parse(model.boredEntity?.price)
+                                        : 0.0,
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                height: 20.w,
+                              ),
+                              SizedBox(
+                                height: 20.w,
+                                child: Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  mainAxisSize: MainAxisSize.max,
+                                  children: <Widget>[
+                                    descTextWidget("participants:"),
+                                    Expanded(
+                                      child: ListView(
+                                        padding: EdgeInsets.symmetric(
+                                            horizontal: 10.w),
+                                        shrinkWrap: true,
+                                        scrollDirection: Axis.horizontal,
+                                        children: List.generate(
+                                          model.boredEntity?.participants ?? 0,
+                                          (index) {
+                                            return Padding(
+                                              padding: index == 0
+                                                  ? EdgeInsets.zero
+                                                  : EdgeInsets.only(left: 6.w),
+                                              child: Icon(
+                                                Icons.mood,
+                                                size: 16,
+                                                color:
+                                                    Theme.of(context).hintColor,
+                                              ),
+                                            );
+                                          },
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ],
+                          ),
                         ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             );
           },
         ),
@@ -333,6 +344,31 @@ class _BoredPageState extends State<BoredPage>
           color: Theme.of(context).primaryColor,
           fontSize: 16.sp,
           fontWeight: FontWeight.w800,
+        ),
+      );
+
+  Widget get _todoListWidget => ChangeNotifierProvider.value(
+        value: _viewModel,
+        child: Consumer<BoredPageViewModel>(
+          builder: (ctx, model, child) {
+            return AnimatedList(
+              key: _viewModel.listKey,
+              padding: EdgeInsets.only(top: 10.w),
+              shrinkWrap: true,
+              itemBuilder: (ctx, index, animation) {
+                return SlideTransition(
+                  position: Tween<Offset>(
+                    begin: const Offset(-1, 0),
+                    end: Offset.zero,
+                  ).animate(animation),
+                  child: Container(
+                    child: Text(model.collectList[index].activity),
+                  ),
+                );
+              },
+              initialItemCount: model.collectList.length,
+            );
+          },
         ),
       );
 }
