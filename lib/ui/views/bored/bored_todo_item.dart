@@ -54,6 +54,7 @@ class TodoItem extends StatelessWidget {
                     Text(
                       todoEntity.activity,
                       style: TextStyle(
+                        fontSize: 14.sp,
                         color:
                             Provider.of<AppViewModel>(context).isDark(context)
                                 ? Colors.white
