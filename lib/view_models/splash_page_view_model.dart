@@ -1,4 +1,4 @@
-import 'package:bored/business_logic/models/bored_entity.dart';
+import 'package:bored/models/bored_entity.dart';
 import 'package:bored/routers/Routers.dart';
 import 'package:bored/routers/home_router.dart';
 import 'package:bored/service_locator.dart';

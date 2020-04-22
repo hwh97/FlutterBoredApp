@@ -1,6 +1,7 @@
 import 'dart:math';
 
-import 'package:bored/business_logic/models/bored_entity.dart';
+import 'package:bored/models/bored_entity.dart';
+import 'package:bored/models/bored_todo_entity.dart';
 import 'package:bored/services/bored/bored_api.dart';
 import 'package:dio/dio.dart';
 
@@ -53,5 +54,20 @@ class BoredApiFake extends BoredApi {
     await Future.delayed(Duration(milliseconds: 700));
     final random = Random();
     return BoredEntity().fromJson(mockList[random.nextInt(mockList.length)]);
+  }
+
+  @override
+  Future<List<BoredTodoEntity>> getBoredTodoList({int page = 1, int rows = 1000}) {
+    return null;
+  }
+
+  @override
+  Future<int> addBoredTodo(BoredEntity boredEntity) {
+    return null;
+  }
+
+  @override
+  Future<int> deleteBoredTodo(int id) {
+    return null;
   }
 }

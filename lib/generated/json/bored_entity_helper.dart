@@ -1,4 +1,4 @@
-import 'package:bored/business_logic/models/bored_entity.dart';
+import 'package:bored/models/bored_entity.dart';
 
 boredEntityFromJson(BoredEntity data, Map<String, dynamic> json) {
 	if (json['activity'] != null) {

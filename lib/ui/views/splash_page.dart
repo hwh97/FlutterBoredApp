@@ -1,4 +1,4 @@
-import 'package:bored/business_logic/view_models/splash_page_view_model.dart';
+import 'package:bored/view_models/splash_page_view_model.dart';
 import 'package:bored/consts/asset_constants.dart';
 import 'package:bored/service_locator.dart';
 import 'package:flare_flutter/flare_actor.dart';

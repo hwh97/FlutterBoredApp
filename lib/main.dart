@@ -1,6 +1,7 @@
 import 'dart:io';
 
-import 'package:bored/business_logic/view_models/app_view_model.dart';
+import 'package:bored/utils/db_util.dart';
+import 'package:bored/view_models/app_view_model.dart';
 import 'package:bored/routers/home_router.dart';
 import 'package:bored/service_locator.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +22,7 @@ void main() {
   Routers.configureRoutes([
     HomeRouter(),
   ]);
+
   runApp(ChangeNotifierProvider.value(
     value: serviceLocator.get<AppViewModel>(),
     child: MyApp(),

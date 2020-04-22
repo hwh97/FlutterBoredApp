@@ -1,8 +1,8 @@
 import 'dart:convert';
 
-import 'package:bored/business_logic/models/bored_entity.dart';
+import 'package:bored/models/bored_entity.dart';
 import 'package:bored/routers/base_router.dart';
-import 'package:bored/ui/views/bored_page.dart';
+import 'package:bored/ui/views/bored/bored_page.dart';
 import 'package:fluro/fluro.dart';
 
 class HomeRouter extends BaseRouter {

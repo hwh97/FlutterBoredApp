@@ -25,7 +25,7 @@ class ProgressBar extends StatefulWidget {
 }
 
 class ProgressBarState extends State<ProgressBar>
-    with SingleTickerProviderStateMixin {
+    with SingleTickerProviderStateMixin, AutomaticKeepAliveClientMixin {
   Animation<double> animation;
   double fraction = 0.0;
   AnimationController controller;
@@ -62,8 +62,8 @@ class ProgressBarState extends State<ProgressBar>
 
   @override
   void didUpdateWidget(ProgressBar oldWidget) {
-    animation.removeListener(_animationListener);
-    controller.reset();
+    animation?.removeListener(_animationListener);
+    controller?.reset();
     if (oldWidget.value != widget.value) {
       _playAnimation(fraction, widget.value);
     }
@@ -81,6 +81,9 @@ class ProgressBarState extends State<ProgressBar>
       fraction = animation.value;
     });
   }
+
+  @override
+  bool get wantKeepAlive => true;
 }
 
 // 进度条绘画
