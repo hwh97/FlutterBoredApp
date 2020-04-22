@@ -1,4 +1,6 @@
+import 'package:bored/view_models/app_view_model.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class ProgressBar extends StatefulWidget {
   final Size size;
@@ -37,11 +39,14 @@ class ProgressBarState extends State<ProgressBar>
       child: CustomPaint(
         size: widget.size,
         painter: ProgressPainter(
-          progress: fraction,
-          maxProgress: widget.maxValue,
-          backgroundColor: widget.backgroundColor ?? Color(0xFFD8D8D8),
-          progressColor: widget.progressColor ?? Theme.of(context).primaryColor,
-        ),
+            progress: fraction,
+            maxProgress: widget.maxValue,
+            backgroundColor: widget.backgroundColor ?? Color(0xFFD8D8D8),
+            progressColor: widget.progressColor ??
+                (Provider.of<AppViewModel>(context, listen: false)
+                        .isDark(context)
+                    ? Colors.grey
+                    : Theme.of(context).primaryColor)),
       ),
     );
   }
@@ -49,8 +54,8 @@ class ProgressBarState extends State<ProgressBar>
   @override
   void initState() {
     super.initState();
-    controller = AnimationController(
-        duration: Duration(milliseconds: 500), vsync: this);
+    controller =
+        AnimationController(duration: Duration(milliseconds: 500), vsync: this);
     _playAnimation(0.0, widget.value);
   }
 
@@ -69,7 +74,7 @@ class ProgressBarState extends State<ProgressBar>
     }
     super.didUpdateWidget(oldWidget);
   }
-  
+
   _playAnimation(double oldValue, double newValue) {
     animation = Tween(begin: oldValue, end: newValue).animate(controller)
       ..addListener(_animationListener);

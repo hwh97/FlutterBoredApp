@@ -7,6 +7,7 @@ import 'package:bored/consts/asset_constants.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/ui/widget/progress_bar.dart';
 import 'package:bored/utils/date_util.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -41,22 +42,30 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
           addAutomaticKeepAlives: true,
           padding: EdgeInsets.only(
             top: MediaQuery.of(context).padding.top + 16.w,
-            left: 10.w,
-            right: 10.w,
           ),
           shrinkWrap: false,
           physics: BouncingScrollPhysics(),
           children: <Widget>[
-            _titleBar,
-            SizedBox(
-              height: 20.w,
+            Padding(
+              padding: EdgeInsets.symmetric(
+                horizontal: 10.w,
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  _titleBar,
+                  SizedBox(
+                    height: 20.w,
+                  ),
+                  _activityHeader,
+                  _activityArea,
+                  SizedBox(
+                    height: 20.w,
+                  ),
+                  _todoListHeader,
+                ],
+              ),
             ),
-            _activityHeader,
-            _activityArea,
-            SizedBox(
-              height: 20.w,
-            ),
-            _todoListHeader,
             _todoListWidget
           ],
         ),
@@ -374,9 +383,10 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
         physics: NeverScrollableScrollPhysics(),
         shrinkWrap: true,
         itemBuilder: (ctx, index, animation) {
-          return GestureDetector(
-            child: TodoItem(todoEntity: _viewModel.collectList[index], animation: animation),
-            onLongPress: () => _viewModel.deleteBored(index),
+          return TodoItem(
+            todoEntity: _viewModel.collectList[index],
+            animation: animation,
+            onClickItem: () => _viewModel.deleteBored(index),
           );
         },
         initialItemCount: _viewModel.collectList.length,

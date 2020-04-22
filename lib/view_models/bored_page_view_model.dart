@@ -57,12 +57,10 @@ class BoredPageViewModel extends ChangeNotifier {
   }
 
   void collectBored() async {
-    if (_collectList.indexWhere((m) => m.key == _boredEntity.key) == -1) {
-      await _boredApi.addBoredTodo(boredEntity);
-      await getTodoList();
-      listKey.currentState.insertItem(0,
-          duration: const Duration(milliseconds: fadeAnimationTime));
-    }
+    await _boredApi.addBoredTodo(boredEntity);
+    await getTodoList();
+    listKey.currentState.insertItem(0,
+        duration: const Duration(milliseconds: fadeAnimationTime));
   }
 
   void deleteBored(int index) async {

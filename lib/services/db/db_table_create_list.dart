@@ -14,7 +14,7 @@ final List<String> dbTableList = ["DROP TABLE IF EXISTS bored_todo",
       ${BoredTodoTable.key} TEXT,
       ${BoredTodoTable.status} INTEGER DEFAULT 0,
       ${BoredTodoTable.updateAt} TIMESTAMP DEFAULT 0,
-      ${BoredTodoTable.createAt} TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+      ${BoredTodoTable.createAt} TIMESTAMP DEFAULT (datetime('now','localtime')),
       ${BoredTodoTable.delFlag} INTEGER DEFAULT 0
     )
   """,
