@@ -1,3 +1,4 @@
+import 'package:bored/generated/l10n.dart';
 import 'package:bored/models/bored_todo_entity.dart';
 import 'package:bored/view_models/app_view_model.dart';
 import 'package:flutter/cupertino.dart';
@@ -45,7 +46,7 @@ class TodoItem extends StatelessWidget {
               onTap: onClickItem,
               borderRadius: BorderRadius.circular(10.w),
               child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 6.w, vertical: 6.w),
+                padding: EdgeInsets.symmetric(horizontal: 8.w, vertical: 10.w),
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -66,10 +67,10 @@ class TodoItem extends StatelessWidget {
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         children: <Widget>[
-                          SizedBox(
-                            width: 70.w,
+                          Padding(
+                            padding: EdgeInsets.only(right: 4.w, bottom: 2.w),
                             child: Text(
-                              'participants:',
+                              '${S.of(context).participants}',
                               style: TextStyle(
                                 color: Theme.of(context).hintColor,
                                 fontSize: 12.sp,

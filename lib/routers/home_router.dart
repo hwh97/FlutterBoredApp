@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:bored/generated/json/base/json_convert_content.dart';
 import 'package:bored/models/bored_entity.dart';
 import 'package:bored/routers/base_router.dart';
 import 'package:bored/ui/views/bored/bored_page.dart';
@@ -14,7 +15,6 @@ class HomeRouter extends BaseRouter {
     handlers = {
       home: Handler(handlerFunc: (c, p) {
         return BoredPage(
-          title: getRouterParams<String>(p, "title"),
           boredEntity: getRouterParams<BoredEntity>(p, "data"),
         );
       }),
@@ -31,11 +31,18 @@ class HomeRouter extends BaseRouter {
   @override
   T getRouterParams<T>(Map<String, List<String>> parameters, String key) {
     T t = super.getRouterParams(parameters, key);
-    final data = jsonDecode(parameters[key].first);
-    if (t == null && data != null) {
-      // 序列化对象处理
-      if (T.toString() == "BoredEntity") {
-        t = BoredEntity().fromJson(data) as T;
+    if (t == null) {
+      final data = jsonDecode(parameters[key].first);
+      // 自定义序列化对象处理
+      if (data != null) {
+        if (T.toString() == "BoredEntity") {
+          t = BoredEntity().fromJson(data) as T;
+        }
+//        else if (T.toString() == "List<BoredEntity>") {
+//          t = data
+//              .map((e) => BoredEntity().fromJson(e))
+//              .toList().cast<BoredEntity>() as T;
+//        }
       }
     }
     return t;

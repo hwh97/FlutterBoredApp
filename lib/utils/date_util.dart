@@ -1,59 +1,65 @@
+import 'package:bored/generated/l10n.dart';
+import 'package:flutter/cupertino.dart';
+
 class DateUtil {
   // get format date
-  static String formatDate({DateTime time}) {
+  static String formatDate(BuildContext context, Locale locale, {DateTime time}) {
     DateTime _time = time ?? DateTime.now().toLocal();
-    return "${_getWeekDay(_time.weekday)} ${_time.day} ${_getMonth(_time.month)} ${_time.year}";
+    if (locale.languageCode == "zh") {
+      return S.of(context).format_date("${_time.year}", _getMonth(context, _time.month), "${_time.day}", _getWeekDay(context, _time.weekday));
+    }
+    return S.of(context).format_date(_getWeekDay(context, _time.weekday), _time.day, _getMonth(context, _time.month), _time.year);
   }
 
-  static String _getWeekDay(int day) {
+  static String _getWeekDay(BuildContext context, int day) {
     switch (day) {
       case DateTime.monday:
-        return "Monday";
+        return S.of(context).monday;
       case DateTime.tuesday:
-        return "Tuesday";
+        return S.of(context).tuesday;
       case DateTime.wednesday:
-        return "Wednesday";
+        return S.of(context).wednesday;
       case DateTime.thursday:
-        return "Thursday";
+        return S.of(context).thursday;
       case DateTime.friday:
-        return "Friday";
+        return S.of(context).friday;
       case DateTime.saturday:
-        return "Saturday";
+        return S.of(context).saturday;
       case DateTime.sunday:
-        return "Sunday";
+        return S.of(context).sunday;
       default:
-        return "Unknown";
+        return S.of(context).unknown;
     }
   }
 
-  static String _getMonth(int month) {
+  static String _getMonth(BuildContext context, int month) {
     switch (month) {
       case DateTime.january:
-        return "January";
+        return S.of(context).january;
       case DateTime.february:
-        return "February";
+        return S.of(context).february;
       case DateTime.march:
-        return "March";
+        return S.of(context).march;
       case DateTime.april:
-        return "April";
+        return S.of(context).april;
       case DateTime.may:
-        return "May";
+        return S.of(context).may;
       case DateTime.june:
-        return "June";
+        return S.of(context).june;
       case DateTime.july:
-        return "July";
+        return S.of(context).july;
       case DateTime.august:
-        return "August";
+        return S.of(context).august;
       case DateTime.september:
-        return "September";
+        return S.of(context).september;
       case DateTime.october:
-        return "October";
+        return S.of(context).october;
       case DateTime.november:
-        return "November";
+        return S.of(context).november;
       case DateTime.december:
-        return "December";
+        return S.of(context).december;
       default:
-        return "Unknown";
+        return S.of(context).unknown;
     }
   }
 }

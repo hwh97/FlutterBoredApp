@@ -34,6 +34,12 @@ class SplashPageState extends State<SplashPage> {
   @override
   void initState() {
     super.initState();
+    _initState();
+  }
+
+  void _initState() async {
+    // load language
+    await _splashPageViewModel.loadLanguageFromCache(context);
     // prepare data and go to main page
     _splashPageViewModel.prepareData(context);
   }

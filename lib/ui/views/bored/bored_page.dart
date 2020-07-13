@@ -1,3 +1,5 @@
+import 'package:bored/consts/config_constants.dart';
+import 'package:bored/generated/l10n.dart';
 import 'package:bored/models/bored_entity.dart';
 import 'package:bored/models/bored_todo_entity.dart';
 import 'package:bored/ui/views/bored/bored_todo_item.dart';
@@ -7,6 +9,7 @@ import 'package:bored/consts/asset_constants.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/ui/widget/progress_bar.dart';
 import 'package:bored/utils/date_util.dart';
+import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,9 +19,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
 class BoredPage extends StatefulWidget {
-  BoredPage({Key key, this.title, this.boredEntity}) : super(key: key);
+  BoredPage({Key key, this.boredEntity}) : super(key: key);
 
-  final String title;
   final BoredEntity boredEntity;
 
   @override
@@ -100,7 +102,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text(
-                widget.title,
+                ConfigConstants.appName(context),
                 style: TextStyle(
                   fontSize: 28.sp,
                   color: Theme.of(context).primaryColor,
@@ -111,7 +113,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                 height: 8.w,
               ),
               Text(
-                DateUtil.formatDate(),
+                DateUtil.formatDate(context, Provider.of<AppViewModel>(context, listen: false).locale),
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: Theme.of(context).hintColor,
@@ -159,7 +161,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
           Text(
-            "Activity",
+            S.of(context).activity,
             style: TextStyle(
               color: Theme.of(context).primaryColor,
               fontSize: 16.sp,
@@ -236,7 +238,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                         margin: EdgeInsets.zero,
                         padding: EdgeInsets.symmetric(
                           vertical: 10.w,
-                          horizontal: 6.w,
+                          horizontal: 8.w,
                         ),
                         width: double.maxFinite,
                         child: Column(
@@ -250,7 +252,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                               child: SizedBox(
                                 width: double.maxFinite,
                                 child: Text(
-                                  model.boredEntity?.activity ?? "Loading",
+                                  model.boredEntity?.activity ?? S.of(context).loading,
                                   style: TextStyle(
                                     color: Provider.of<AppViewModel>(context)
                                             .isDark(context)
@@ -268,7 +270,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                descTextWidget("accessibility:"),
+                                descTextWidget(S.of(context).accessibility),
                                 SizedBox(
                                   width: 10.w,
                                 ),
@@ -291,7 +293,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                             Row(
                               mainAxisAlignment: MainAxisAlignment.start,
                               children: <Widget>[
-                                descTextWidget("price:"),
+                                descTextWidget(S.of(context).price),
                                 SizedBox(
                                   width: 10.w,
                                 ),
@@ -315,7 +317,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                                     MainAxisAlignment.spaceBetween,
                                 mainAxisSize: MainAxisSize.max,
                                 children: <Widget>[
-                                  descTextWidget("participants:"),
+                                  descTextWidget(S.of(context).participants),
                                   Expanded(
                                     child: ListView(
                                       padding: EdgeInsets.symmetric(
@@ -369,7 +371,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
   }
 
   Widget get _todoListHeader => Text(
-        "TODO List",
+        S.of(context).todoList,
         style: TextStyle(
           color: Theme.of(context).primaryColor,
           fontSize: 16.sp,

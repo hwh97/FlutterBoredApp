@@ -1,22 +1,31 @@
+import 'package:bored/consts/config_constants.dart';
+import 'package:bored/generated/l10n.dart';
+import 'package:bored/service_locator.dart';
+import 'package:bored/utils/sp_util.dart';
 import 'package:flutter/material.dart';
 
-enum ThemeModel { System, Light, Dark }
+enum AppThemeModel { System, Light, Dark }
+enum AppLanguage {System, Chinese, English}
 
 class AppViewModel extends ChangeNotifier {
-  ThemeModel _themeModel;
+  AppThemeModel _themeModel;
+  AppLanguage _appLanguage = AppLanguage.System;
+  Locale _locale;
 
-  ThemeModel get themeModel => _themeModel;
+  AppThemeModel get themeModel => _themeModel;
+  AppLanguage get appLanguage => _appLanguage;
+  Locale get locale => _locale;
 
   bool isDark(BuildContext context) {
-    if (_themeModel != null && _themeModel != ThemeModel.System) {
-      return _themeModel == ThemeModel.Dark;
+    if (_themeModel != null && _themeModel != AppThemeModel.System) {
+      return _themeModel == AppThemeModel.Dark;
     }
     return Theme.of(context).brightness == Brightness.dark;
   }
 
   ThemeData getThemeData({bool darkTheme}) {
-    if (_themeModel != null && _themeModel != ThemeModel.System) {
-      return _getTheme(_themeModel == ThemeModel.Dark);
+    if (_themeModel != null && _themeModel != AppThemeModel.System) {
+      return _getTheme(_themeModel == AppThemeModel.Dark);
     }
     return _getTheme(darkTheme);
   }
@@ -57,8 +66,28 @@ class AppViewModel extends ChangeNotifier {
           );
   }
 
-  void setDarkModel(ThemeModel _themeModel) {
+  void setDarkModel(AppThemeModel _themeModel) {
     this._themeModel = _themeModel;
+    notifyListeners();
+  }
+
+  Future setLocale({Locale locale, bool isFollowSystem}) async {
+    if (isFollowSystem) {
+      _appLanguage = AppLanguage.System;
+    } else {
+      _appLanguage = locale.languageCode == "zh" ? AppLanguage.Chinese : AppLanguage.English;
+      await serviceLocator.get<SpUtil>().setString(ConfigConstants.languageKey, locale.languageCode);
+    }
+
+    switch (locale.languageCode) {
+      case "zh":
+        _locale = Locale("zh", "CN");
+        break;
+      default:
+        _locale = Locale("en", "US");
+        break;
+    }
+//    S.load(locale);
     notifyListeners();
   }
 }

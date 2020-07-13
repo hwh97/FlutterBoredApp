@@ -2,6 +2,11 @@
 
 Bored App (Developing)
 
+# IDEA plugin used
+- [FlutterJsonBeanFactory](https://plugins.jetbrains.com/plugin/11415-flutterjsonbeanfactory)
+- [Flutter Intl](https://plugins.jetbrains.com/plugin/13666-flutter-intl/)
+
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
