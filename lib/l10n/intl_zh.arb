@@ -26,5 +26,17 @@
   "october": "10月",
   "november": "11月",
   "december": "12月",
-  "unknown": "未知"
+  "unknown": "未知",
+  "settings": "设置",
+  "language": "多语言",
+  "darkMode": "深色模式",
+  "confirm": "确定",
+  "cancel": "取消",
+  "darkModeDialogTitle": "深色模式",
+  "languageDialogTitle": "多语言",
+  "auto": "跟随系统",
+  "simplifiedZh": "简体中文",
+  "english": "English",
+  "normalModeOption": "普通模式",
+  "darkModeOption": "深色模式"
 }

@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:bored/consts/config_constants.dart';
 import 'package:bored/generated/l10n.dart';
+import 'package:bored/routers/setting_router.dart';
 import 'package:bored/view_models/app_view_model.dart';
 import 'package:bored/routers/home_router.dart';
 import 'package:bored/service_locator.dart';
@@ -10,10 +11,10 @@ import 'package:flutter/services.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:provider/provider.dart';
 
-import 'routers/Routers.dart';
-import 'ui/views/splash_page.dart';
+import 'package:bored/utils/router_util.dart';
+import 'package:bored/ui/views/splash_page.dart';
 
-void main() {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   if (Platform.isAndroid) {
     SystemUiOverlayStyle systemUiOverlayStyle =
@@ -21,8 +22,9 @@ void main() {
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
   setUpServiceLocator();
-  Routers.configureRoutes([
+  serviceLocator.get<RouterUtil>().configureRoutes([
     HomeRouter(),
+    SettingRouter(),
   ]);
 
   runApp(ChangeNotifierProvider.value(
@@ -36,6 +38,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return LocalListener(
       child: MaterialApp(
+        navigatorKey: serviceLocator.get<RouterUtil>().key,
         onGenerateTitle: (BuildContext context) {
           return ConfigConstants.appName(context);
         },
@@ -52,7 +55,7 @@ class MyApp extends StatelessWidget {
           GlobalWidgetsLocalizations.delegate
         ],
         supportedLocales: S.delegate.supportedLocales,
-        onGenerateRoute: Routers.router.generator,
+        onGenerateRoute: serviceLocator.get<RouterUtil>().router.generator,
         home: SplashPage(),
       ),
     );

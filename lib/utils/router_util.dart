@@ -3,23 +3,27 @@ import 'dart:convert';
 import 'package:fluro/fluro.dart';
 import 'package:flutter/cupertino.dart';
 
-import 'base_router.dart';
+import '../routers/base_router.dart';
 
-class Routers {
-  static Router router = Router();
+class RouterUtil {
+  final Router router = Router();
+  final GlobalKey<NavigatorState> key = GlobalKey<NavigatorState>(debugLabel: "dialog_util_navigator_key");
 
-  static void configureRoutes(List<BaseRouter> routers) {
+  BuildContext get context => key.currentState.overlay.context;
+  NavigatorState get state => key.currentState;
+
+  void configureRoutes(List<BaseRouter> routers) {
     routers.forEach((f) {
       f.defineRoutes(router);
     });
   }
 
-  static Future<dynamic> navigateTo(BuildContext context, String path,
+  Future<dynamic> navigateTo(String path,
       {Map<String, dynamic> params,
         bool replace = false,
         bool clearStack = false,
         TransitionType transition,
-        Duration transitionDuration = const Duration(milliseconds: 250),
+        Duration transitionDuration = const Duration(milliseconds: 200),
         RouteTransitionsBuilder transitionBuilder}) {
     if (params != null && params.length != 0) {
       path = path + paramsToString(params);

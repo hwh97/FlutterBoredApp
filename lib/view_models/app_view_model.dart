@@ -8,7 +8,7 @@ enum AppThemeModel { System, Light, Dark }
 enum AppLanguage {System, Chinese, English}
 
 class AppViewModel extends ChangeNotifier {
-  AppThemeModel _themeModel;
+  AppThemeModel _themeModel = AppThemeModel.System;
   AppLanguage _appLanguage = AppLanguage.System;
   Locale _locale;
 
@@ -74,6 +74,7 @@ class AppViewModel extends ChangeNotifier {
   Future setLocale({Locale locale, bool isFollowSystem}) async {
     if (isFollowSystem) {
       _appLanguage = AppLanguage.System;
+      await serviceLocator.get<SpUtil>().remove(ConfigConstants.languageKey);
     } else {
       _appLanguage = locale.languageCode == "zh" ? AppLanguage.Chinese : AppLanguage.English;
       await serviceLocator.get<SpUtil>().setString(ConfigConstants.languageKey, locale.languageCode);

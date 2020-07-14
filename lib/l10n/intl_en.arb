@@ -26,5 +26,17 @@
   "october": "october",
   "november": "november",
   "december": "december",
-  "unknown": "Unknown"
+  "unknown": "Unknown",
+  "settings": "Settings",
+  "language": "Language",
+  "darkMode": "Dark Mode",
+  "confirm": "Done",
+  "cancel": "Cancel",
+  "darkModeDialogTitle": "Dark Mode",
+  "languageDialogTitle": "Language",
+  "auto": "Auto",
+  "simplifiedZh": "简体中文",
+  "english": "English",
+  "normalModeOption": "Normal Mode",
+  "darkModeOption": "Dark Mode"
 }

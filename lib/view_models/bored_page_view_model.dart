@@ -1,9 +1,12 @@
 import 'package:bored/models/bored_entity.dart';
 import 'package:bored/models/bored_todo_entity.dart';
+import 'package:bored/routers/setting_router.dart';
 import 'package:bored/services/bored/bored_api.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/ui/views/bored/bored_todo_item.dart';
+import 'package:bored/utils/router_util.dart';
 import 'package:dio/dio.dart';
+import 'package:fluro/fluro.dart';
 import 'package:flutter/animation.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +15,7 @@ class BoredPageViewModel extends ChangeNotifier {
   static const int fadeAnimationTime = 300;
 
   final BoredApi _boredApi = serviceLocator<BoredApi>();
+  final RouterUtil _routers = serviceLocator.get<RouterUtil>();
   CancelToken _cancelToken;
 
   BoredEntity _boredEntity;
@@ -54,6 +58,10 @@ class BoredPageViewModel extends ChangeNotifier {
     for (BoredTodoEntity entity in collectList) {
       listKey.currentState.insertItem(0);
     }
+  }
+
+  void goSettingPage(BuildContext context) async {
+    _routers.navigateTo(SettingRouter.setting, transition: TransitionType.fadeIn);
   }
 
   void collectBored() async {

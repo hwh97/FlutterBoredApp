@@ -1,9 +1,9 @@
 import 'package:bored/consts/config_constants.dart';
 import 'package:bored/models/bored_entity.dart';
-import 'package:bored/routers/Routers.dart';
 import 'package:bored/routers/home_router.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/services/bored/bored_api.dart';
+import 'package:bored/utils/router_util.dart';
 import 'package:bored/utils/sp_util.dart';
 import 'package:bored/view_models/app_view_model.dart';
 import 'package:devicelocale/devicelocale.dart';
@@ -13,6 +13,7 @@ import 'package:provider/provider.dart';
 
 class SplashPageViewModel extends ChangeNotifier {
   final BoredApi _boredApi = serviceLocator<BoredApi>();
+  final RouterUtil _routers = serviceLocator.get<RouterUtil>();
 
   void prepareData(BuildContext context) async {
     BoredEntity _boredEntity;
@@ -21,8 +22,7 @@ class SplashPageViewModel extends ChangeNotifier {
     } catch (e) {
       debugPrint("splash page err: ${e.toString()}");
     } finally {
-      Routers.navigateTo(
-        context,
+      _routers.navigateTo(
         HomeRouter.home,
         params: {"data": _boredEntity?.toJson()},
         replace: true,

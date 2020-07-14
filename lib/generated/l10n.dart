@@ -312,6 +312,126 @@ class S {
       args: [],
     );
   }
+
+  /// `Settings`
+  String get settings {
+    return Intl.message(
+      'Settings',
+      name: 'settings',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get darkMode {
+    return Intl.message(
+      'Dark Mode',
+      name: 'darkMode',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Done`
+  String get confirm {
+    return Intl.message(
+      'Done',
+      name: 'confirm',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Cancel`
+  String get cancel {
+    return Intl.message(
+      'Cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get darkModeDialogTitle {
+    return Intl.message(
+      'Dark Mode',
+      name: 'darkModeDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get languageDialogTitle {
+    return Intl.message(
+      'Language',
+      name: 'languageDialogTitle',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Auto`
+  String get auto {
+    return Intl.message(
+      'Auto',
+      name: 'auto',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `简体中文`
+  String get simplifiedZh {
+    return Intl.message(
+      '简体中文',
+      name: 'simplifiedZh',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `English`
+  String get english {
+    return Intl.message(
+      'English',
+      name: 'english',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Normal Mode`
+  String get normalModeOption {
+    return Intl.message(
+      'Normal Mode',
+      name: 'normalModeOption',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Dark Mode`
+  String get darkModeOption {
+    return Intl.message(
+      'Dark Mode',
+      name: 'darkModeOption',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

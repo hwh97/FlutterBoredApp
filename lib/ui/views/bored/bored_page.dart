@@ -1,7 +1,6 @@
 import 'package:bored/consts/config_constants.dart';
 import 'package:bored/generated/l10n.dart';
 import 'package:bored/models/bored_entity.dart';
-import 'package:bored/models/bored_todo_entity.dart';
 import 'package:bored/ui/views/bored/bored_todo_item.dart';
 import 'package:bored/view_models/bored_page_view_model.dart';
 import 'package:bored/view_models/app_view_model.dart';
@@ -9,12 +8,10 @@ import 'package:bored/consts/asset_constants.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/ui/widget/progress_bar.dart';
 import 'package:bored/utils/date_util.dart';
-import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:flutter_slidable/flutter_slidable.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:provider/provider.dart';
 
@@ -46,7 +43,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
             top: MediaQuery.of(context).padding.top + 16.w,
           ),
           shrinkWrap: false,
-          physics: BouncingScrollPhysics(),
+          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(
@@ -96,6 +93,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
   Widget get _titleBar => Row(
         mainAxisSize: MainAxisSize.max,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Column(
             mainAxisSize: MainAxisSize.min,
@@ -121,38 +119,24 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
               ),
             ],
           ),
-//          SizedBox(
-//            width: 36.w,
-//            height: 36.w,
-//            child: Provider.of<AppViewModel>(context, listen: false)
-//                    .isDark(context)
-//                ? FloatingActionButton(
-//                    heroTag: "night-tag",
-//                    onPressed: () =>
-//                        Provider.of<AppViewModel>(context, listen: false)
-//                            .setDarkModel(ThemeModel.Light),
-//                    tooltip: "Day mode",
-//                    child: SvgPicture.asset(
-//                      AssetConstants.daySvg,
-//                      color: Color(0x98FFFFFF),
-//                      width: 22.w,
-//                      height: 22.w,
-//                    ),
-//                  )
-//                : FloatingActionButton(
-//                    heroTag: "day-tag",
-//                    onPressed: () =>
-//                        Provider.of<AppViewModel>(context, listen: false)
-//                            .setDarkModel(ThemeModel.Dark),
-//                    tooltip: 'Night mode',
-//                    child: SvgPicture.asset(
-//                      AssetConstants.nightSvg,
-//                      color: Colors.white,
-//                      width: 22.w,
-//                      height: 22.w,
-//                    ),
-//                  ),
-//          ),
+          Padding(
+            padding: EdgeInsets.only(top: 2.w),
+            child: InkWell(
+              borderRadius: BorderRadius.circular(20.w),
+              child: Container(
+                alignment: Alignment.center,
+                width: 38.w,
+                height: 38.w,
+                child: SvgPicture.asset(
+                  AssetConstants.systemSvg,
+                  color: Theme.of(context).primaryColor.withOpacity(0.8),
+                  width: 28.w,
+                  height: 28.w,
+                ),
+              ),
+              onTap: () => _viewModel.goSettingPage(context),
+            ),
+          ),
         ],
       );
 
