@@ -48,9 +48,7 @@ class SettingPageViewModel extends ChangeNotifier {
 
   void onShowDarkModeDialog(BuildContext context) {
     void onSelectDarkMode(int index) async {
-      Provider.of<AppViewModel>(context, listen: false).setDarkModel(index == 0
-          ? AppThemeModel.System
-          : index == 1 ? AppThemeModel.Light : AppThemeModel.Dark);
+      Provider.of<AppViewModel>(context, listen: false).setDarkMode(AppThemeModel.values[index]);
     }
 
     _dialogUtil.showSimpleDialog(

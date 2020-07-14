@@ -6,4 +6,5 @@ class ConfigConstants {
 
   // share preferences keys
   static String get languageKey => "cur_language";
+  static String get darkModeKey => "cur_dark_mode";
 }

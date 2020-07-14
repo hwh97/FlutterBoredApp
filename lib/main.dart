@@ -22,6 +22,8 @@ void main() async {
     SystemChrome.setSystemUIOverlayStyle(systemUiOverlayStyle);
   }
   setUpServiceLocator();
+  // wait util service all registered
+  await serviceLocator.allReady();
   serviceLocator.get<RouterUtil>().configureRoutes([
     HomeRouter(),
     SettingRouter(),

@@ -32,9 +32,12 @@ class SplashPageViewModel extends ChangeNotifier {
   }
 
   // load from share preference
-  Future loadLanguageFromCache(BuildContext context) async {
-    // wait util service all registered
-    await serviceLocator.allReady();
+  Future initApp(BuildContext context) async {
+    int darkMode = serviceLocator.get<SpUtil>().getInt(ConfigConstants.darkModeKey);
+    if (darkMode != null) {
+      Provider.of<AppViewModel>(context, listen: false).initDarkMode(AppThemeModel.values[darkMode]);
+    }
+
     String languageCode = serviceLocator.get<SpUtil>().getString(ConfigConstants.languageKey);
     if (languageCode != null && languageCode.isNotEmpty) {
       Provider.of<AppViewModel>(context, listen: false).setLocale(
