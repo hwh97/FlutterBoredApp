@@ -4,12 +4,19 @@ import 'package:bored/utils/dialog_util.dart';
 import 'package:bored/view_models/app_view_model.dart';
 import 'package:devicelocale/devicelocale.dart';
 import 'package:flutter/material.dart';
+import 'package:package_info/package_info.dart';
 import 'package:provider/provider.dart';
 
 class SettingPageViewModel extends ChangeNotifier {
+  String version = "";
   List<SettingItemModel> items;
   final DialogUtil _dialogUtil = serviceLocator.get<DialogUtil>();
 
+  void loadVersionInfo(BuildContext context) async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    version = S.of(context).versionDesc(packageInfo.version);
+    notifyListeners();
+  }
 
   void loadItems(BuildContext context) {
     // dark mode subtitle

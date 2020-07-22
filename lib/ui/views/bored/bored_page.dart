@@ -43,7 +43,8 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
             top: MediaQuery.of(context).padding.top + 16.w,
           ),
           shrinkWrap: false,
-          physics: BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
+          physics:
+              BouncingScrollPhysics(parent: AlwaysScrollableScrollPhysics()),
           children: <Widget>[
             Padding(
               padding: EdgeInsets.symmetric(
@@ -111,7 +112,8 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                 height: 8.w,
               ),
               Text(
-                DateUtil.formatDate(context, Provider.of<AppViewModel>(context, listen: false).locale),
+                DateUtil.formatDate(context,
+                    Provider.of<AppViewModel>(context, listen: false).locale),
                 style: TextStyle(
                   fontSize: 14.sp,
                   color: Theme.of(context).hintColor,
@@ -236,7 +238,8 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                               child: SizedBox(
                                 width: double.maxFinite,
                                 child: Text(
-                                  model.boredEntity?.activity ?? S.of(context).loading,
+                                  model.boredEntity?.activity ??
+                                      S.of(context).loading,
                                   style: TextStyle(
                                     color: Provider.of<AppViewModel>(context)
                                             .isDark(context)
@@ -372,7 +375,7 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
           return TodoItem(
             todoEntity: _viewModel.collectList[index],
             animation: animation,
-            onClickItem: () => _viewModel.deleteBored(index),
+            onClickItem: () => _viewModel.showBoredDialog(context, index),
           );
         },
         initialItemCount: _viewModel.collectList.length,

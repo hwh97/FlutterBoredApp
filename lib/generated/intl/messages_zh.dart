@@ -21,20 +21,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(p1, p2, p3, p4) => "${p1}年${p2}${p3}号${p4}";
 
+  static m1(p1) => "当前版本 ${p1}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "accessibility" : MessageLookupByLibrary.simpleMessage("可行性："),
+    "action" : MessageLookupByLibrary.simpleMessage("操作"),
     "activity" : MessageLookupByLibrary.simpleMessage("活动"),
     "app_name" : MessageLookupByLibrary.simpleMessage("找点事做"),
     "april" : MessageLookupByLibrary.simpleMessage("4月"),
     "august" : MessageLookupByLibrary.simpleMessage("8月"),
     "auto" : MessageLookupByLibrary.simpleMessage("跟随系统"),
     "cancel" : MessageLookupByLibrary.simpleMessage("取消"),
+    "completed" : MessageLookupByLibrary.simpleMessage("已完成"),
     "confirm" : MessageLookupByLibrary.simpleMessage("确定"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("深色模式"),
     "darkModeDialogTitle" : MessageLookupByLibrary.simpleMessage("深色模式"),
     "darkModeOption" : MessageLookupByLibrary.simpleMessage("深色模式"),
     "december" : MessageLookupByLibrary.simpleMessage("12月"),
+    "delete" : MessageLookupByLibrary.simpleMessage("删除"),
     "english" : MessageLookupByLibrary.simpleMessage("English"),
     "february" : MessageLookupByLibrary.simpleMessage("2月"),
     "format_date" : m0,
@@ -62,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "todoList" : MessageLookupByLibrary.simpleMessage("待办列表"),
     "tuesday" : MessageLookupByLibrary.simpleMessage("星期二"),
     "unknown" : MessageLookupByLibrary.simpleMessage("未知"),
+    "versionDesc" : m1,
     "wednesday" : MessageLookupByLibrary.simpleMessage("星期三")
   };
 }

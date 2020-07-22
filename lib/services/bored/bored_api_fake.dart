@@ -70,4 +70,9 @@ class BoredApiFake extends BoredApi {
   Future<int> deleteBoredTodo(int id) {
     return null;
   }
+
+  @override
+  Future<int> completeBoredTodo(int id) {
+    return null;
+  }
 }

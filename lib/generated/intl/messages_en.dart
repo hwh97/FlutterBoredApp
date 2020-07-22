@@ -21,20 +21,25 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static m0(p1, p2, p3, p4) => "${p1} ${p2} ${p3} ${p4}";
 
+  static m1(p1) => "Version ${p1}";
+
   final messages = _notInlinedMessages(_notInlinedMessages);
   static _notInlinedMessages(_) => <String, Function> {
     "accessibility" : MessageLookupByLibrary.simpleMessage("accessibility:"),
+    "action" : MessageLookupByLibrary.simpleMessage("Action"),
     "activity" : MessageLookupByLibrary.simpleMessage("Activity"),
     "app_name" : MessageLookupByLibrary.simpleMessage("Boring Remover"),
     "april" : MessageLookupByLibrary.simpleMessage("april"),
     "august" : MessageLookupByLibrary.simpleMessage("august"),
     "auto" : MessageLookupByLibrary.simpleMessage("Auto"),
     "cancel" : MessageLookupByLibrary.simpleMessage("Cancel"),
+    "completed" : MessageLookupByLibrary.simpleMessage("Completed"),
     "confirm" : MessageLookupByLibrary.simpleMessage("Done"),
     "darkMode" : MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "darkModeDialogTitle" : MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "darkModeOption" : MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "december" : MessageLookupByLibrary.simpleMessage("december"),
+    "delete" : MessageLookupByLibrary.simpleMessage("Delete"),
     "english" : MessageLookupByLibrary.simpleMessage("English"),
     "february" : MessageLookupByLibrary.simpleMessage("february"),
     "format_date" : m0,
@@ -62,6 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "todoList" : MessageLookupByLibrary.simpleMessage("TODO List"),
     "tuesday" : MessageLookupByLibrary.simpleMessage("Tuesday"),
     "unknown" : MessageLookupByLibrary.simpleMessage("Unknown"),
+    "versionDesc" : m1,
     "wednesday" : MessageLookupByLibrary.simpleMessage("Wednesday")
   };
 }

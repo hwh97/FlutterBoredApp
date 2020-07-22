@@ -432,6 +432,46 @@ class S {
       args: [],
     );
   }
+
+  /// `Action`
+  String get action {
+    return Intl.message(
+      'Action',
+      name: 'action',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Completed`
+  String get completed {
+    return Intl.message(
+      'Completed',
+      name: 'completed',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Delete`
+  String get delete {
+    return Intl.message(
+      'Delete',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Version {p1}`
+  String versionDesc(Object p1) {
+    return Intl.message(
+      'Version $p1',
+      name: 'versionDesc',
+      desc: '',
+      args: [p1],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

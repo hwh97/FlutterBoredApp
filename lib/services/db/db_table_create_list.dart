@@ -14,8 +14,16 @@ final List<String> dbTableList = ["DROP TABLE IF EXISTS bored_todo",
       ${BoredTodoTable.key} TEXT,
       ${BoredTodoTable.status} INTEGER DEFAULT 0,
       ${BoredTodoTable.updateAt} TIMESTAMP DEFAULT 0,
+      ${BoredTodoTable.finishAt} TIMESTAMP DEFAULT 0,
       ${BoredTodoTable.createAt} TIMESTAMP DEFAULT (datetime('now','localtime')),
       ${BoredTodoTable.delFlag} INTEGER DEFAULT 0
     )
   """,
 ];
+
+final Map<String, String> updateDbTableList =
+    {"1_2":
+            """
+            ALTER TABLE bored_todo ADD COLUMN ${BoredTodoTable.finishAt} TIMESTAMP DEFAULT 0
+            """,
+    };

@@ -38,5 +38,9 @@
   "simplifiedZh": "简体中文",
   "english": "English",
   "normalModeOption": "普通模式",
-  "darkModeOption": "深色模式"
+  "darkModeOption": "深色模式",
+  "action": "操作",
+  "completed": "已完成",
+  "delete": "删除",
+  "versionDesc": "当前版本 {p1}"
 }

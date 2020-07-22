@@ -1,3 +1,4 @@
+import 'package:animations/animations.dart';
 import 'package:bored/generated/l10n.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/utils/router_util.dart';
@@ -16,13 +17,19 @@ class DialogUtil {
       bool barrierDismissible = true,
       VoidCallback onConfirm,
       VoidCallback onCancel}) {
-    return showDialog(
+    return showModal(
       context: _routers.context,
-      barrierDismissible: barrierDismissible,
+      configuration: FadeScaleTransitionConfiguration(
+        barrierDismissible: barrierDismissible,
+        reverseTransitionDuration: Duration(milliseconds: 150),
+      ),
       builder: (BuildContext context) {
         return AlertDialog(
-          title: Text(title),
-          content: Text(content),
+          title: Text(title, style: TextStyle(fontSize: 18.sp)),
+          content: Text(
+            content,
+            style: TextStyle(fontSize: 14.sp),
+          ),
           actions: <Widget>[
             FlatButton(
               onPressed: () {
@@ -54,12 +61,15 @@ class DialogUtil {
       @required int initialIndex,
       bool barrierDismissible = true,
       OnSelectSimpleDialog onSelectSimpleDialog}) {
-    return showDialog(
+    return showModal(
       context: _routers.context,
-      barrierDismissible: barrierDismissible,
+      configuration: FadeScaleTransitionConfiguration(
+        barrierDismissible: barrierDismissible,
+        reverseTransitionDuration: Duration(milliseconds: 150),
+      ),
       builder: (BuildContext context) {
         return SimpleDialog(
-          title: Text(title),
+          title: Text(title, style: TextStyle(fontSize: 18.sp)),
           children: List.generate(
             options.length,
             (index) => SimpleDialogOption(
@@ -67,7 +77,10 @@ class DialogUtil {
                 padding: EdgeInsets.symmetric(vertical: 10.w),
                 child: Row(
                   children: <Widget>[
-                    Text(options[index]),
+                    Text(
+                      options[index],
+                      style: TextStyle(fontSize: 14.sp),
+                    ),
                     Spacer(),
                     Offstage(
                       offstage: initialIndex != index,
@@ -83,6 +96,53 @@ class DialogUtil {
                 Navigator.of(context).pop();
                 if (onSelectSimpleDialog != null) {
                   onSelectSimpleDialog(index);
+                }
+              },
+            ),
+          ),
+        );
+      },
+    );
+  }
+
+  Future showTodoListDialog(
+      {@required String completedText,
+      @required String deleteText,
+      bool barrierDismissible,
+      VoidCallback onSelectCompleted,
+      VoidCallback onSelectDelete}) {
+    return showModal(
+      context: _routers.context,
+      configuration: FadeScaleTransitionConfiguration(
+        barrierDismissible: barrierDismissible,
+        reverseTransitionDuration: Duration(milliseconds: 150),
+      ),
+      builder: (BuildContext context) {
+        return SimpleDialog(
+          children: List.generate(
+            2,
+            (index) => SimpleDialogOption(
+              child: Padding(
+                padding: EdgeInsets.symmetric(vertical: 10.w),
+                child: Row(
+                  children: <Widget>[
+                    Text(
+                      index == 0 ? completedText : deleteText,
+                      style: TextStyle(
+                        fontSize: 14.sp,
+                        color: index == 1 ? Colors.red : null,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              onPressed: () {
+                Navigator.of(context).pop();
+                if (index == 0 && onSelectCompleted != null) {
+                  onSelectCompleted();
+                } else if (index == 1 && onSelectDelete != null) {
+                  onSelectDelete();
                 }
               },
             ),

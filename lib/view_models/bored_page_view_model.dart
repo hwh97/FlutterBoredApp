@@ -1,9 +1,11 @@
+import 'package:bored/generated/l10n.dart';
 import 'package:bored/models/bored_entity.dart';
 import 'package:bored/models/bored_todo_entity.dart';
 import 'package:bored/routers/setting_router.dart';
 import 'package:bored/services/bored/bored_api.dart';
 import 'package:bored/service_locator.dart';
 import 'package:bored/ui/views/bored/bored_todo_item.dart';
+import 'package:bored/utils/dialog_util.dart';
 import 'package:bored/utils/router_util.dart';
 import 'package:dio/dio.dart';
 import 'package:fluro/fluro.dart';
@@ -16,6 +18,7 @@ class BoredPageViewModel extends ChangeNotifier {
 
   final BoredApi _boredApi = serviceLocator<BoredApi>();
   final RouterUtil _routers = serviceLocator.get<RouterUtil>();
+  final DialogUtil _dialogUtil = serviceLocator.get<DialogUtil>();
   CancelToken _cancelToken;
 
   BoredEntity _boredEntity;
@@ -69,6 +72,25 @@ class BoredPageViewModel extends ChangeNotifier {
     await getTodoList();
     listKey.currentState.insertItem(0,
         duration: const Duration(milliseconds: fadeAnimationTime));
+  }
+
+  void showBoredDialog(BuildContext context, int index) async {
+    _dialogUtil.showTodoListDialog(
+      completedText: S.of(context).completed,
+      deleteText: S.of(context).delete,
+      barrierDismissible: true,
+      onSelectCompleted: () => completeBored(index),
+      onSelectDelete: () => deleteBored(index),
+    );
+  }
+
+  void completeBored(int index) async {
+    BoredTodoEntity entity = _collectList[index];
+    if (entity.status == 1) return;
+    await _boredApi.completeBoredTodo(entity.id);
+    await getTodoList();
+    // ignore: invalid_use_of_protected_member
+    listKey.currentState.setState(() { });
   }
 
   void deleteBored(int index) async {

@@ -44,4 +44,9 @@ class BoredApiImpl extends BoredApi {
   Future<int> deleteBoredTodo(int id) {
     return serviceLocator.get<BoredTodoTable>().delete(deleteId: id);
   }
+
+  @override
+  Future<int> completeBoredTodo(int id) {
+    return serviceLocator.get<BoredTodoTable>().completeBored(boredId: id);
+  }
 }

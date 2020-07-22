@@ -7,20 +7,16 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
 
-class SettingPage extends StatefulWidget {
-  @override
-  State<StatefulWidget> createState() => SettingPageState();
-}
-
-class SettingPageState extends State<SettingPage> {
+class SettingPage extends StatelessWidget {
   final SettingPageViewModel _settingPageViewModel =
       serviceLocator.get<SettingPageViewModel>();
 
   @override
   Widget build(BuildContext context) {
+    _settingPageViewModel.loadVersionInfo(context);
     _settingPageViewModel.loadItems(context);
     return Scaffold(
-      appBar: buildAppBar(),
+      appBar: buildAppBar(context),
       backgroundColor: Provider.of<AppViewModel>(context).isDark(context)
           ? Color(0xFF0D0D0D)
           : Colors.white,
@@ -44,12 +40,33 @@ class SettingPageState extends State<SettingPage> {
               },
             ),
           ),
+          SliverFillRemaining(
+            hasScrollBody: false,
+            child: Container(
+              padding: EdgeInsets.only(bottom: 15.w),
+              alignment: Alignment.bottomCenter,
+              child: ChangeNotifierProvider.value(
+                value: _settingPageViewModel,
+                child: Consumer<SettingPageViewModel>(
+                  builder: (ctx, model, child) {
+                    return Text(
+                      model.version,
+                      style: TextStyle(
+                        color: Colors.grey,
+                        fontSize: 13.sp,
+                      ),
+                    );
+                  },
+                ),
+              ),
+            ),
+          ),
         ],
       ),
     );
   }
 
-  Widget buildAppBar() {
+  Widget buildAppBar(BuildContext context) {
     Color primaryColor = Theme.of(context).primaryColor;
     return AppBar(
       leading: Align(
@@ -90,11 +107,6 @@ class SettingPageState extends State<SettingPage> {
       ),
     );
   }
-
-  @override
-  void initState() {
-    super.initState();
-  }
 }
 
 class SettingItem extends StatelessWidget {
@@ -109,7 +121,7 @@ class SettingItem extends StatelessWidget {
       child: Column(
         children: <Widget>[
           Container(
-            padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 10.w),
+            padding: EdgeInsets.symmetric(vertical: 10.w, horizontal: 12.w),
             child: Row(
               children: <Widget>[
                 Column(
@@ -132,11 +144,17 @@ class SettingItem extends StatelessWidget {
                   ],
                 ),
                 Spacer(),
-                Icon(Icons.arrow_forward_ios, size: 16.w, color: Colors.grey,)
+                Icon(
+                  Icons.arrow_forward_ios,
+                  size: 16.w,
+                  color: Colors.grey,
+                )
               ],
             ),
           ),
-          Divider(height: 1.w,),
+          Divider(
+            height: 1.w,
+          ),
         ],
       ),
     );

@@ -10,4 +10,6 @@ abstract class BoredApi {
   Future<int> addBoredTodo(BoredEntity boredEntity);
 
   Future<int> deleteBoredTodo(int id);
+
+  Future<int> completeBoredTodo(int id);
 }

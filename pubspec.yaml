@@ -52,6 +52,11 @@ dependencies:
   shared_preferences: ^0.5.8
   # device locale https://pub.dev/packages/devicelocale
   devicelocale: ^0.3.1
+  # animations package https://pub.dev/packages/animations
+  animations: ^1.1.1
+  # 版本信息
+  package_info: ^0.4.1
+
 
 dev_dependencies:
   flutter_test:

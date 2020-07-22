@@ -23,7 +23,7 @@ class SplashPageState extends State<SplashPage> {
       body: FlareActor(
         AssetConstants.splashFlr,
         alignment: Alignment.center,
-        fit: BoxFit.fill,
+        fit: BoxFit.contain,
         animation: "Preview2",
         snapToEnd: true,
         sizeFromArtboard: true,

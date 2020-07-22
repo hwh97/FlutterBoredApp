@@ -1,7 +1,7 @@
 import 'package:bored/models/bored_entity.dart';
 import 'package:bored/services/db/base_table.dart';
 import 'package:bored/services/db/db_table_create_list.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:sqflite/sqflite.dart';
 
 class BoredTodoTable extends BaseTable {
@@ -23,6 +23,7 @@ class BoredTodoTable extends BaseTable {
   static const String status = "status";
   static const String updateAt = "update_at";
   static const String createAt = "create_at";
+  static const String finishAt = "finish_at";
   static const String delFlag = "del_flag";
 
   Future<List<Map>> getTodoList(int page, int rows) async {
@@ -30,6 +31,7 @@ class BoredTodoTable extends BaseTable {
     String querySql = "select * from $tableName where $delFlag = 0 order by $createAt desc limit $rows offset ${(page -
         1) * rows}";
     List<Map> data = await db.rawQuery(querySql);
+    await close();
     return data;
   }
 
@@ -55,4 +57,11 @@ class BoredTodoTable extends BaseTable {
     return id;
   }
 
+  Future<int> completeBored({@required int boredId}) async {
+    Database db = await getDatabase();
+    int id = await db.update(tableName, {status: 1, finishAt: DateTime.now().toString()},
+        where: "id = ?", whereArgs: [boredId]);
+    await close();
+    return id;
+  }
 }
