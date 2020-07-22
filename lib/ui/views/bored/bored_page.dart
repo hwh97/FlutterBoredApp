@@ -66,7 +66,22 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
                 ],
               ),
             ),
-            _todoListWidget
+            Stack(
+              children: <Widget>[
+                ChangeNotifierProvider.value(
+                  value: _viewModel,
+                  child: Consumer<BoredPageViewModel>(
+                    builder: (ctx, model, child) {
+                      return Offstage(
+                        offstage: model.collectList.length != 0,
+                        child: _emptyWidget,
+                      );
+                    },
+                  ),
+                ),
+                _todoListWidget,
+              ],
+            ),
           ],
         ),
       ),
@@ -379,5 +394,30 @@ class _BoredPageState extends State<BoredPage> with TickerProviderStateMixin {
           );
         },
         initialItemCount: _viewModel.collectList.length,
+      );
+
+  Widget get _emptyWidget => Container(
+        height: 300.w,
+        alignment: Alignment.center,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            SvgPicture.asset(
+              "assets/svg/empty.svg",
+              width: 80.w,
+              height: 60.w,
+            ),
+            SizedBox(
+              height: 30.w,
+            ),
+            Text(
+              S.of(context).emptyHint,
+              style: TextStyle(
+                color: Colors.grey,
+                fontSize: 14.sp,
+              ),
+            ),
+          ],
+        ),
       );
 }

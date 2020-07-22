@@ -79,7 +79,7 @@ class DialogUtil {
                   children: <Widget>[
                     Text(
                       options[index],
-                      style: TextStyle(fontSize: 14.sp),
+                      style: TextStyle(fontSize: 13.sp),
                     ),
                     Spacer(),
                     Offstage(

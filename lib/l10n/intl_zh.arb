@@ -42,5 +42,6 @@
   "action": "操作",
   "completed": "已完成",
   "delete": "删除",
-  "versionDesc": "当前版本 {p1}"
+  "versionDesc": "当前版本 {p1}",
+  "emptyHint": "没有已收藏的活动哦~"
 }

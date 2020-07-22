@@ -26,6 +26,9 @@ class BoredPageViewModel extends ChangeNotifier {
   BoredEntity get boredEntity => _boredEntity;
   List<BoredTodoEntity> _collectList = [];
 
+  bool get isEmpty => _isEmpty;
+  bool _isEmpty = true;
+
   List<BoredTodoEntity> get collectList => _collectList;
 
   final GlobalKey<AnimatedListState> listKey = GlobalKey<AnimatedListState>();
@@ -70,6 +73,8 @@ class BoredPageViewModel extends ChangeNotifier {
   void collectBored() async {
     await _boredApi.addBoredTodo(boredEntity);
     await getTodoList();
+    notifyListeners();
+
     listKey.currentState.insertItem(0,
         duration: const Duration(milliseconds: fadeAnimationTime));
   }
@@ -97,6 +102,10 @@ class BoredPageViewModel extends ChangeNotifier {
     BoredTodoEntity entity = _collectList[index];
     await _boredApi.deleteBoredTodo(entity.id);
     await getTodoList();
+    Future.delayed(Duration(milliseconds: BoredPageViewModel.fadeAnimationTime), () {
+      notifyListeners();
+    });
+
     listKey.currentState.removeItem(index,
         (ctx, animation) => TodoItem(todoEntity: entity, animation: animation),
         duration: Duration(milliseconds: BoredPageViewModel.fadeAnimationTime));

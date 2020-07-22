@@ -472,6 +472,16 @@ class S {
       args: [p1],
     );
   }
+
+  /// `Nothing to see here`
+  String get emptyHint {
+    return Intl.message(
+      'Nothing to see here',
+      name: 'emptyHint',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "darkModeOption" : MessageLookupByLibrary.simpleMessage("Dark Mode"),
     "december" : MessageLookupByLibrary.simpleMessage("december"),
     "delete" : MessageLookupByLibrary.simpleMessage("Delete"),
+    "emptyHint" : MessageLookupByLibrary.simpleMessage("Nothing to see here"),
     "english" : MessageLookupByLibrary.simpleMessage("English"),
     "february" : MessageLookupByLibrary.simpleMessage("february"),
     "format_date" : m0,

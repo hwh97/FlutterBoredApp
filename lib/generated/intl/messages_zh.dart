@@ -40,6 +40,7 @@ class MessageLookup extends MessageLookupByLibrary {
     "darkModeOption" : MessageLookupByLibrary.simpleMessage("深色模式"),
     "december" : MessageLookupByLibrary.simpleMessage("12月"),
     "delete" : MessageLookupByLibrary.simpleMessage("删除"),
+    "emptyHint" : MessageLookupByLibrary.simpleMessage("没有已收藏的活动哦~"),
     "english" : MessageLookupByLibrary.simpleMessage("English"),
     "february" : MessageLookupByLibrary.simpleMessage("2月"),
     "format_date" : m0,

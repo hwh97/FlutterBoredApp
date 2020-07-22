@@ -42,5 +42,6 @@
   "action": "Action",
   "completed": "Completed",
   "delete": "Delete",
-  "versionDesc": "Version {p1}"
+  "versionDesc": "Version {p1}",
+  "emptyHint": "Nothing to see here"
 }
