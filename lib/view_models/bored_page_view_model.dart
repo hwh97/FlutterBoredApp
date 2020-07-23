@@ -61,6 +61,8 @@ class BoredPageViewModel extends ChangeNotifier {
 
   void loadTodoList() async {
     await getTodoList();
+    notifyListeners();
+
     for (BoredTodoEntity entity in collectList) {
       listKey.currentState.insertItem(0);
     }
